@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background: radial-gradient(circle at center, #ff9a9e, #fad0c4, #fbc2eb);
+  font-family: 'Montserrat', sans-serif;
+  overflow:hidden;
+  position:relative;
+}
+
+/* Caixa de presente */
+#present-box {
+  position:relative;
+  width:100px; height:100px;
+  cursor:pointer; z-index:10;
+  transition: transform 0.2s;
+}
+
+#present-box:hover { transform:scale(1.1); }
+
+/* Base e tampa da caixa */
+#present-box .box { width:100px; height:100px; background:#ff4757; border-radius:10px; position:absolute; bottom:0; left:0; }
+#present-box .lid { width:100px; height:20px; background:#ff6b81; border-radius:10px 10px 0 0; position:absolute; top:0; left:0; transform-origin:top; transition: transform 0.3s; }
+
+/* Fita */
+#present-box .ribbon.vertical { width:10px; height:100%; background:#f1f2f6; position:absolute; left:45px; top:0; }
+#present-box .ribbon.horizontal { width:100%; height:10px; background:#f1f2f6; position:absolute; top:45px; left:0; }
+
+/* Partículas gerais */
+#hearts-container { position:absolute; top:50%; left:50%; width:0; height:0; pointer-events:none; }
+.heart { position:absolute; font-size:20px; animation:flyUp 1.5s ease-out forwards; }
+@keyframes flyUp { 0%{opacity:1; transform:translate(0,0) scale(1);} 100%{opacity:0; transform:translate(var(--x), var(--y)) scale(0.5) rotate(var(--rotate));} }
+
+/* Card surpresa */
+#surprise-card {
+  position:absolute; top:50%; left:50%;
+  transform:translate(-50%,-50%) scale(0);
+  text-align:center;
+  color:#fff;
+  width:300px;
+  background: rgba(255,255,255,0.1);
+  border:2px solid #fff;
+  border-radius:20px;
+  padding:25px;
+  box-shadow:0 8px 30px rgba(0,0,0,0.3);
+  backdrop-filter:blur(10px);
+  z-index:15;
+  transition: transform 0.8s ease, opacity 0.8s ease;
+  overflow:hidden;
+}
+
+#surprise-card.show {
+  transform:translate(-50%,-50%) scale(1);
+}
+
+/* Texto e estilo interno */
+#surprise-card h1 { font-size:28px; margin-bottom:15px; text-shadow:0 0 8px #fff; }
+#surprise-card p { font-size:16px; line-height:1.5; }
+
+/* Partículas internas do card */
+.internal-particles { position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; overflow:hidden; }
+.card-particle { position:absolute; font-size:14px; opacity:0.8; animation:cardParticle 2s linear forwards; }
+@keyframes cardParticle { 0%{transform:translateY(0) scale(0.5);} 100%{transform:translateY(-50px) scale(1); opacity:0;} }
